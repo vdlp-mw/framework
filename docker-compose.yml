@@ -5,15 +5,18 @@ services:
     ports:
       - "11211:11211"
     restart: always
-  mysql:
-    image: mysql:5.7
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_DATABASE: "forge"
-    ports:
-      - "3306:3306"
+
+  pgsql:
+    container_name: postgres
+    image: postgres
     restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: root
+      POSTGRES_DB: "forge"
   redis:
     image: redis:5.0-alpine
     ports:
